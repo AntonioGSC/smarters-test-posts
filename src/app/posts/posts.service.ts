@@ -1,35 +1,49 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
+export interface IPost {
+  id: number;
+  userId: number;
+  title: string;
+  body: string;
+}
+export interface IComment {
+  id: number;
+  postId: number;
+  name: string;
+  email: string;
+  body: string;
+}
+export interface IUser {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  phone?: string;
+  website?: string;
+  address?: Object;
+  company?: Object;
+}
 @Injectable({
   providedIn: 'root'
 })
 export class PostsService {
   constructor(private http: HttpClient) { }
 
-  async getPosts() {
-    return this.http.get<any[]>('https://jsonplaceholder.typicode.com/posts').subscribe(resultado => console.log(resultado));
-
-    // const response = <Object[]>await fetch('https://jsonplaceholder.typicode.com/posts')
-    //   .then(response => response.json())
-    //   .then(data => data);
+  getPosts(): Observable<IPost[]> {
+    return this.http.get<IPost[]>('https://jsonplaceholder.typicode.com/posts');
   }
 
-  async getPost(id: number) {
-    return await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
-      .then(response => response.json())
-      .then(data => data);
+  getPost(id: number): Observable<IPost> {
+    return this.http.get<IPost>(`https://jsonplaceholder.typicode.com/posts/${id}`);
   }
 
-  async getPostComments(id: number) {
-    return await fetch(`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
-      .then(response => response.json())
-      .then(data => data);
+  getPostComments(id: number): Observable<IComment[]> {
+    return this.http.get<IComment[]>(`https://jsonplaceholder.typicode.com/posts/${id}/comments`);
   }
 
-  async getUser(id: number) {
-    return await fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
-      .then(response => response.json())
-      .then(data => data);
+  getUser(id: number): Observable<IUser> {
+    return this.http.get<IUser>(`https://jsonplaceholder.typicode.com/users/${id}`);
   }
 }

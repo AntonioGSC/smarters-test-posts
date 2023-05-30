@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PostsService } from '../posts.service';
+import { IPost, PostsService } from '../posts.service';
 
 @Component({
     selector: 'app-list',
@@ -8,13 +8,13 @@ import { PostsService } from '../posts.service';
 })
 export class ListComponent implements OnInit {
 
-    posts: Object = [];
+    posts: IPost[] = [];
 
     constructor(private postsService: PostsService) { }
 
     async ngOnInit() {
-        this.posts = this.postsService.getPosts()
-
-        console.log(this.posts);
+        this.postsService.getPosts().subscribe(
+            data => this.posts = data
+        );
     }
 }
