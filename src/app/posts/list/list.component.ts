@@ -8,14 +8,13 @@ import { PostsService } from '../posts.service';
 })
 export class ListComponent implements OnInit {
 
-    posts = [];
-    post = {}
-    postComment = {}
-    postUser = {}
+    posts: Object = [];
 
     constructor(private postsService: PostsService) { }
 
     async ngOnInit() {
-        this.posts = await this.postsService.getPosts();
+        this.posts = this.postsService.getPosts()
+
+        console.log(this.posts);
     }
 }

@@ -1,15 +1,18 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostsService {
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   async getPosts() {
-    return await fetch('https://jsonplaceholder.typicode.com/posts')
-      .then(response => response.json())
-      .then(data => data);
+    return this.http.get<any[]>('https://jsonplaceholder.typicode.com/posts').subscribe(resultado => console.log(resultado));
+
+    // const response = <Object[]>await fetch('https://jsonplaceholder.typicode.com/posts')
+    //   .then(response => response.json())
+    //   .then(data => data);
   }
 
   async getPost(id: number) {
