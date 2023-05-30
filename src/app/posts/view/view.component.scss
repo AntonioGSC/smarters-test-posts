@@ -15,13 +15,20 @@
   flex-direction: column;
   text-align: end;
   align-items: flex-end;
+
   p {
     margin: 0;
+  }
+
+  a {
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
   }
 }
 
 .comments {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 
   .card {
     margin-bottom: 1rem;

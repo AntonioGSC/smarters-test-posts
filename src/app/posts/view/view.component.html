@@ -14,7 +14,7 @@
     </p>
     <p *ngIf="user.email">Email: {{user.email}}</p>
     <p *ngIf="user.phone">Phone: {{user.phone}}</p>
-    <p *ngIf="user.website">Website: {{user.website}}</p>
+    <p *ngIf="user.website">Website: <a (click)="goToLink(user.website)">{{user.website}}</a></p>
   </div>
 
   <div class="comments">

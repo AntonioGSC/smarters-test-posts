@@ -60,4 +60,9 @@ export class ViewComponent implements OnInit {
       );
     }, 100);
   }
+
+  goToLink(url: string) {
+    console.log(url)
+    window.open('https://' + url, "_blank");
+  }
 }
