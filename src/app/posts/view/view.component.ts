@@ -14,6 +14,9 @@ export class ViewComponent implements OnInit {
 
   ID: number = 0;
 
+  loading: boolean = false;
+  show: boolean = false;
+
   post: IPost = {
     userId: 0,
     id: 0,
@@ -36,14 +39,19 @@ export class ViewComponent implements OnInit {
   async ngOnInit() {
     this.ID = this.route.snapshot.params['id'];
 
-    await this.getPost();
-    await this.getComments();
-    await this.getUser();
+    this.getPost();
   }
 
-  async getPost() {
+  getPost() {
     this.postsService.getPost(this.ID).subscribe(
-      data => this.post = data
+      async (data) => {
+        this.loading = true;
+        this.post = data;
+        await this.getComments();
+        await this.getUser();
+        this.loading = false;
+        this.show = true;
+      }
     );
   }
 
@@ -54,11 +62,9 @@ export class ViewComponent implements OnInit {
   }
 
   async getUser() {
-    setTimeout(() => {
-      this.postsService.getUser(this.post.userId).subscribe(
-        data => this.user = data
-      );
-    }, 100);
+    this.postsService.getUser(this.post.userId).subscribe(
+      data => this.user = data
+    );
   }
 
   goToLink(url: string) {

@@ -11,6 +11,23 @@ h1 {
     padding: 1rem;
 
     .card {
-        width: 25rem;
+        width: 100%;
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .tags {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 0.5rem;
+            }
+
+            p {
+                margin: 0;
+            }
+        }
     }
 }

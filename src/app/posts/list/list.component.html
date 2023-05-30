@@ -3,9 +3,18 @@
 
     <div class="posts-list">
         <div class="card" *ngFor="let post of posts; index as i">
+            <div class="card-header">
+                <div class="tags">
+                    <p>#Tag1</p>
+                    <p>#Tag2</p>
+                </div>
+                <div>
+                    <p>10 min Reading</p>
+                </div>
+            </div>
             <div class="card-body">
-              <h5 class="card-title">{{post.title | slice:0:35 }}{{post.title.length > 35 ? '...' : ''}}</h5>
-              <p class="card-text">{{post.body | slice:0:80 }}{{post.body.length > 80 ? '...' : ''}}</p>
+              <h5 class="card-title">{{post.title}}</h5>
+              <p class="card-text">{{post.body | slice:0:150 }}{{post.body.length > 150 ? '...' : ''}}</p>
               <a class="btn btn-primary" [routerLink]="['/posts', post.id]">Read More</a>
             </div>
         </div>
